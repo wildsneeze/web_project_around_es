@@ -1,19 +1,19 @@
 # Around The U.S.
 
-## Descripción
-Around The U.S. es una página web interactiva donde los usuarios pueden compartir fotos de lugares que han visitado en Estados Unidos, editar su perfil y explorar las publicaciones de otros.
+## Descripción del proyecto
+Around The U.S. es una página web interactiva donde los usuarios pueden compartir fotos de lugares que han visitado y editar su perfil.
 
-## Funcionalidad
+## Funciones
 - Editar nombre y descripción del perfil
-- Agregar nuevas tarjetas con nombre e imagen
-- Dar "Me gusta" a las tarjetas
-- Eliminar tarjetas
+- Agregar nuevas imagenes con nombre e foto
+- Dar "Me gusta" a las imagenes
+- Eliminar imagenes ya incluidas.
 - Ver una versión ampliada de la imagen al hacer clic en ella
 
-## Tecnologías
+## Tecnologías usadas
 - HTML5
-- CSS3 (metodología BEM)
-- JavaScript (manipulación del DOM, templates, eventos)
+- CSS3
+- JavaScript (DOM, templates, event listeners)
 
 ## Enlace al proyecto
-[Ver en GitHub Pages](https://wildsneeze.github.io/web_project_around_es/)
+[Link a GitHub Pages](https://wildsneeze.github.io/web_project_around_es/)
