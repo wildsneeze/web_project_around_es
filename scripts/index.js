@@ -47,7 +47,7 @@ const nameInput = profileForm.querySelector('.popup__input_type_name');
 const descriptionInput = profileForm.querySelector('.popup__input_type_description');
 
 initialCards.forEach((card) => {
-  renderCard(card.name, card.link, cardsList);
+  renderCard(card, cardsList);
 });
 
 function openModal(modal) {
@@ -91,7 +91,7 @@ profileForm.addEventListener('submit', function(evt) {
   handleProfileFormSubmit(evt);
 });
 
-function getCardElement(name = 'Sin título', link='./images/placeholder.jpg') {
+function getCardElement({name = 'Sin título', link='./images/placeholder.jpg'}={}) {
   const cardElement = cardTemplate.content.cloneNode(true);
   cardElement.querySelector('.card__title').textContent = name;
   cardElement.querySelector('.card__image').src = link;
@@ -112,8 +112,8 @@ function getCardElement(name = 'Sin título', link='./images/placeholder.jpg') {
   return cardElement;
 }
 
-function renderCard(name, link, container){
-  const cardElement = getCardElement(name, link);
+function renderCard({name, link}, container){
+  const cardElement = getCardElement({name, link});
   container.prepend(cardElement);
 }
 
@@ -129,7 +129,7 @@ function handleCardFormSubmit(evt) {
   evt.preventDefault();
   const name = newCardForm.querySelector('.popup__input_type_card-name').value;
   const link = newCardForm.querySelector('.popup__input_type_url').value;
-  renderCard(name, link, cardsList);
+  renderCard({name, link}, cardsList);
   closeModal(newCardPopup);
 
 }
