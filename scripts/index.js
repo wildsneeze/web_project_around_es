@@ -131,6 +131,7 @@ function handleCardFormSubmit(evt) {
   const link = newCardForm.querySelector('.popup__input_type_url').value;
   renderCard({name, link}, cardsList);
   closeModal(newCardPopup);
+  newCardForm.reset();
 
 }
 
