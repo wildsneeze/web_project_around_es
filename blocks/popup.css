@@ -31,7 +31,8 @@
   cursor: pointer;
 }
 
-.popup__button_disabled, .popup__button_disabled:hover {
+.popup__button_disabled, 
+.popup__button_disabled:hover {
   cursor: not-allowed;
   background: rgba(217, 217, 217, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
