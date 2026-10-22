@@ -31,6 +31,13 @@
   cursor: pointer;
 }
 
+.popup__button_disabled, .popup__button_disabled:hover {
+  cursor: not-allowed;
+  background: rgba(217, 217, 217, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: #CCCCCC;
+}
+
 .popup__close {
   width: 35px;
   height: 35px;
@@ -94,6 +101,14 @@
   line-height: 16px;
   color: #ff0000;
   opacity: 0;
+}
+
+.popup__error_visible {
+  opacity: 1;
+}
+
+.popup__input_type_error {
+  border-bottom-color: #ff0000;
 }
 
 .popup__title {
