@@ -50,23 +50,29 @@
             type="button"
           ></button>
           <h3 class="popup__title">Editar perfil</h3>
-          <form class="popup__form" id="edit-profile-form">
-            <label class="popup__field">Nombre
+          <form class="popup__form" id="edit-profile-form" novalidate>
+            <label class="popup__field">
             <input
               class="popup__input popup__input_type_name"
               id="popup-profile-name"
               name="name"
               placeholder="Nombre"
               type="text"
-            /> <span class="popup__error" id="popup-profile-name-error"></span></label>
-            <label class="popup__field">Acerca de mí
+              required
+              minlength="2"
+              maxlength="40"
+            /><span class="popup__error" id="popup-profile-name-error">asd</span></label>
+            <label class="popup__field">
             <input
               class="popup__input popup__input_type_description"
               id="popup-profile-description"
               name="description"
               placeholder="Acerca de mí"
               type="text"
-            /> <span class="popup__error" id="popup-profile-description-error"></span></label>
+              required
+              minlength="2"
+              maxlength="200"
+            /><span class="popup__error" id="popup-profile-description-error"></span></label>
             <button class="button popup__button" type="submit">Guardar</button>
           </form>
         </div>
@@ -79,26 +85,28 @@
             type="button"
           ></button>
           <h3 class="popup__title">Nuevo lugar</h3>
-          <form class="popup__form" id="new-card-form">
-            <label class="popup__field">Título
+          <form class="popup__form" id="new-card-form" novalidate>
+            <label class="popup__field">
             <input
               class="popup__input popup__input_type_card-name"
               id="popup-card-name"
               name="place-name"
               placeholder="Título"
               required
+              minlength="2"
+              maxlength="30"
               type="text"
             /><span class="popup__error" id="popup-card-name-error"></span></label>
-            <label class="popup__field">Enlace a la imagen
+            <label class="popup__field">
             <input
               class="popup__input popup__input_type_url"
               id="popup-card-url"
               name="link"
-              placeholder="Enlace a la imagen"
+              placeholder="URL de la imagen"
               required
               type="url"
             /><span class="popup__error" id="popup-card-url-error"></span></label>
-            <button class="button popup__button" type="submit">Crear</button>
+            <button class="button popup__button" type="submit">Guardar</button>
           </form>
         </div>
       </div>
