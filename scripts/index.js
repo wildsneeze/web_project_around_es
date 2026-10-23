@@ -1,3 +1,5 @@
+import { showInputError, hideInputError, checkInputValidity } from './validate.js';
+
 const initialCards = [
   {
     name: 'Valle de Yosemite',
