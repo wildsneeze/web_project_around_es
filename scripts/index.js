@@ -1,4 +1,4 @@
-import { showInputError, hideInputError, checkInputValidity } from './validate.js';
+import { setEventListeners,resetValidation } from './validate.js';
 
 const initialCards = [
   {
@@ -47,6 +47,7 @@ const profileDescription = document.querySelector('.profile__description');
 const profileForm = document.querySelector('#edit-profile-form')
 const nameInput = profileForm.querySelector('.popup__input_type_name');
 const descriptionInput = profileForm.querySelector('.popup__input_type_description');
+const popupList = document.querySelectorAll('.popup');
 
 initialCards.forEach((card) => {
   renderCard(card, cardsList);
@@ -54,10 +55,12 @@ initialCards.forEach((card) => {
 
 function openModal(modal) {
   modal.classList.add('popup_is-opened');
+  document.addEventListener('keydown', handleEscClose);
 }
 
 function closeModal(modal) {
   modal.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', handleEscClose);
 }
 
 editButton.addEventListener('click', function() {
@@ -79,6 +82,7 @@ function fillProfileForm() {
 
 function handleOpenEditModal() {
   fillProfileForm();
+  resetValidation(profileForm);
   openModal(editPopup);
 }
 
@@ -120,6 +124,7 @@ function renderCard({name, link}, container){
 }
 
 addCardButton.addEventListener('click', function() {
+  resetValidation(newCardForm);
   openModal(newCardPopup);
 });
 
@@ -140,3 +145,23 @@ function handleCardFormSubmit(evt) {
 newCardForm.addEventListener('submit', function(evt) {
   handleCardFormSubmit(evt);
 });
+
+setEventListeners(profileForm);
+setEventListeners(newCardForm);
+
+popupList.forEach((popup) => {
+  popup.addEventListener('mousedown', function(evt) {
+    if (evt.target === popup) {
+      closeModal(popup);
+    }
+  });
+});
+
+function handleEscClose(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is-opened');
+    if (openedPopup) {
+      closeModal(openedPopup);
+    }
+  }
+}
