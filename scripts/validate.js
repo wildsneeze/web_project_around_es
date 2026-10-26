@@ -36,9 +36,14 @@ function toggleButtonState(inputList, buttonElement) {
   }
 }
 
-export function setEventListeners(formElement) {
+function getFormElements(formElement) {
   const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
   const buttonElement = formElement.querySelector('.popup__button');
+  return { inputList, buttonElement };
+}
+
+export function setEventListeners(formElement) {
+  const { inputList, buttonElement } = getFormElements(formElement);
   toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
@@ -49,8 +54,7 @@ export function setEventListeners(formElement) {
 }
 
 export function resetValidation(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__button');
+  const { inputList, buttonElement } = getFormElements(formElement);
   inputList.forEach((inputElement) => {
     hideInputError(formElement, inputElement);
   });

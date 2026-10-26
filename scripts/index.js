@@ -1,4 +1,4 @@
-import { setEventListeners,resetValidation } from './validate.js';
+import { setEventListeners, resetValidation } from './validate.js';
 
 const initialCards = [
   {
@@ -35,17 +35,15 @@ const addCardButton = document.querySelector('.profile__add-button');
 const imagePopup = document.querySelector('#image-popup');
 const imagePopupImage = imagePopup.querySelector('.popup__image');
 const imagePopupCaption = imagePopup.querySelector('.popup__caption');
-const imagePopupCloseButton = imagePopup.querySelector('.popup__close');
 const newCardPopup = document.querySelector('#new-card-popup');
 const newCardForm = document.querySelector('#new-card-form');
-const closeNewCardPopupButton = newCardPopup.querySelector('.popup__close');
-const closePopupButton = editPopup.querySelector('.popup__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileForm = document.querySelector('#edit-profile-form');
 const nameInput = profileForm.querySelector('.popup__input_type_name');
 const descriptionInput = profileForm.querySelector('.popup__input_type_description');
 const popupList = document.querySelectorAll('.popup');
+const closeButtonList = document.querySelectorAll('.popup__close');
 
 initialCards.forEach((card) => {
   renderCard(card, cardsList);
@@ -65,12 +63,11 @@ editButton.addEventListener('click', function() {
   handleOpenEditModal();
 });
 
-closePopupButton.addEventListener('click', function() {
-  closeModal(editPopup);
-});
-
-imagePopupCloseButton.addEventListener('click', function() {
-  closeModal(imagePopup);
+closeButtonList.forEach((closeButton) => {
+  closeButton.addEventListener('click', function() {
+    const popup = closeButton.closest('.popup');
+    closeModal(popup);
+  });
 });
 
 function fillProfileForm() {
@@ -124,10 +121,6 @@ function renderCard({name, link}, container){
 addCardButton.addEventListener('click', function() {
   resetValidation(newCardForm);
   openModal(newCardPopup);
-});
-
-closeNewCardPopupButton.addEventListener('click', function() {
-  closeModal(newCardPopup);
 });
 
 function handleCardFormSubmit(evt) { 
