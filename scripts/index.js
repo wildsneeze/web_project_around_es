@@ -25,9 +25,7 @@ const initialCards = [
     name: 'Lago di Braies',
     link: 'https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg'
   }
-]
-
-
+];
 
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('#edit-popup');
@@ -44,7 +42,7 @@ const closeNewCardPopupButton = newCardPopup.querySelector('.popup__close');
 const closePopupButton = editPopup.querySelector('.popup__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const profileForm = document.querySelector('#edit-profile-form')
+const profileForm = document.querySelector('#edit-profile-form');
 const nameInput = profileForm.querySelector('.popup__input_type_name');
 const descriptionInput = profileForm.querySelector('.popup__input_type_description');
 const popupList = document.querySelectorAll('.popup');
@@ -64,7 +62,7 @@ function closeModal(modal) {
 }
 
 editButton.addEventListener('click', function() {
-  handleOpenEditModal()
+  handleOpenEditModal();
 });
 
 closePopupButton.addEventListener('click', function() {
@@ -102,10 +100,10 @@ function getCardElement({name = 'Sin título', link='./images/placeholder.jpg'}=
   cardElement.querySelector('.card__title').textContent = name;
   cardElement.querySelector('.card__image').src = link;
   cardElement.querySelector('.card__image').alt = name;
-   cardElement.querySelector('.card__like-button').addEventListener('click', function(evt) {
+  cardElement.querySelector('.card__like-button').addEventListener('click', function(evt) {
     evt.target.classList.toggle('card__like-button_is-active');
   });
-   cardElement.querySelector('.card__delete-button').addEventListener('click', function(evt) {
+  cardElement.querySelector('.card__delete-button').addEventListener('click', function(evt) {
     evt.target.closest('.card').remove();
   });
   cardElement.querySelector('.card__image').addEventListener('click', function() {
@@ -139,7 +137,6 @@ function handleCardFormSubmit(evt) {
   renderCard({name, link}, cardsList);
   closeModal(newCardPopup);
   newCardForm.reset();
-
 }
 
 newCardForm.addEventListener('submit', function(evt) {
