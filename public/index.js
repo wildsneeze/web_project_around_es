@@ -1,4 +1,4 @@
-import { setEventListeners, resetValidation } from './validate.js';
+import { setEventListeners, resetValidation } from '../src/validate.js';
 
 const initialCards = [
   {
