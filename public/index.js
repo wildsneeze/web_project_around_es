@@ -1,4 +1,5 @@
-import { setEventListeners, resetValidation } from './validate.js';
+import { FormValidator } from './FormValidator.js';
+import { defaultFormConfig } from './utils/constants.js';
 const initialCards = [
     {
         name: 'Valle de Yosemite',
@@ -42,6 +43,8 @@ const nameInput = profileForm.querySelector('.popup__input_type_name');
 const descriptionInput = profileForm.querySelector('.popup__input_type_description');
 const popupList = document.querySelectorAll('.popup');
 const closeButtonList = document.querySelectorAll('.popup__close');
+const profileValidator = new FormValidator(defaultFormConfig, profileForm);
+const newCardValidator = new FormValidator(defaultFormConfig, newCardForm);
 initialCards.forEach((card) => {
     renderCard(card, cardsList);
 });
@@ -68,7 +71,7 @@ function fillProfileForm() {
 }
 function handleOpenEditModal() {
     fillProfileForm();
-    resetValidation(profileForm);
+    profileValidator.resetValidation();
     openModal(editPopup);
 }
 function handleProfileFormSubmit(evt) {
@@ -104,7 +107,7 @@ function renderCard({ name, link }, container) {
     container.prepend(cardElement);
 }
 addCardButton.addEventListener('click', function () {
-    resetValidation(newCardForm);
+    newCardValidator.resetValidation();
     openModal(newCardPopup);
 });
 function handleCardFormSubmit(evt) {
@@ -118,8 +121,8 @@ function handleCardFormSubmit(evt) {
 newCardForm.addEventListener('submit', function (evt) {
     handleCardFormSubmit(evt);
 });
-setEventListeners(profileForm);
-setEventListeners(newCardForm);
+profileValidator.enableValidation();
+newCardValidator.enableValidation();
 popupList.forEach((popup) => {
     popup.addEventListener('mousedown', function (evt) {
         if (evt.target === popup) {
