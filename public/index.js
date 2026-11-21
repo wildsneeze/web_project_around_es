@@ -1,5 +1,6 @@
 import { FormValidator } from './FormValidator.js';
 import { defaultFormConfig } from './utils/constants.js';
+import { Card } from './Card.js';
 const initialCards = [
     {
         name: 'Valle de Yosemite',
@@ -28,7 +29,6 @@ const initialCards = [
 ];
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('#edit-popup');
-const cardTemplate = document.querySelector('#card-template');
 const cardsList = document.querySelector('.cards__list');
 const addCardButton = document.querySelector('.profile__add-button');
 const imagePopup = document.querySelector('#image-popup');
@@ -83,27 +83,15 @@ function handleProfileFormSubmit(evt) {
 profileForm.addEventListener('submit', function (evt) {
     handleProfileFormSubmit(evt);
 });
-function getCardElement({ name = 'Sin título', link = './images/placeholder.jpg' } = {}) {
-    const cardElement = cardTemplate.content.cloneNode(true);
-    cardElement.querySelector('.card__title').textContent = name;
-    cardElement.querySelector('.card__image').src = link;
-    cardElement.querySelector('.card__image').alt = name;
-    cardElement.querySelector('.card__like-button').addEventListener('click', function (evt) {
-        evt.target.classList.toggle('card__like-button_is-active');
-    });
-    cardElement.querySelector('.card__delete-button').addEventListener('click', function (evt) {
-        evt.target.closest('.card').remove();
-    });
-    cardElement.querySelector('.card__image').addEventListener('click', function () {
-        imagePopupImage.src = link;
-        imagePopupImage.alt = name;
-        imagePopupCaption.textContent = name;
-        openModal(imagePopup);
-    });
-    return cardElement;
+function handleCardClick(name, link) {
+    imagePopupImage.src = link;
+    imagePopupImage.alt = name;
+    imagePopupCaption.textContent = name;
+    openModal(imagePopup);
 }
 function renderCard({ name, link }, container) {
-    const cardElement = getCardElement({ name, link });
+    const card = new Card({ name, link }, '#card-template', handleCardClick);
+    const cardElement = card.generateCard();
     container.prepend(cardElement);
 }
 addCardButton.addEventListener('click', function () {
