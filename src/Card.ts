@@ -11,6 +11,10 @@ export class Card {
   private templateSelector: string;
   private handleCardClick: HandleCardClick;
   private element: HTMLElement;
+  private title: HTMLElement;
+  private image: HTMLImageElement;
+  private likeButton: HTMLButtonElement;
+  private deleteButton: HTMLButtonElement;
 
   constructor(
     data: CardData,
@@ -22,6 +26,14 @@ export class Card {
     this.templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
     this.element = this.getTemplate();
+    this.title = this.element.querySelector(".card__title") as HTMLElement;
+    this.image = this.element.querySelector(".card__image") as HTMLImageElement;
+    this.likeButton = this.element.querySelector(
+      ".card__like-button",
+    ) as HTMLButtonElement;
+    this.deleteButton = this.element.querySelector(
+      ".card__delete-button",
+    ) as HTMLButtonElement;
   }
 
   private getTemplate(): HTMLElement {
@@ -35,22 +47,15 @@ export class Card {
   }
 
   public generateCard(): HTMLElement {
-    const cardTitle = this.element.querySelector(".card__title") as HTMLElement;
-    cardTitle.textContent = this.name;
-    const cardImage = this.element.querySelector(
-      ".card__image",
-    ) as HTMLImageElement;
-    cardImage.src = this.link;
-    cardImage.alt = this.name;
+    this.title.textContent = this.name;
+    this.image.src = this.link;
+    this.image.alt = this.name;
     this.setEventListeners();
     return this.element;
   }
 
   private handleLike() {
-    const likeButton = this.element.querySelector(
-      ".card__like-button",
-    ) as HTMLButtonElement;
-    likeButton.classList.toggle("card__like-button_is-active");
+    this.likeButton.classList.toggle("card__like-button_is-active");
   }
 
   private handleDelete() {
@@ -62,18 +67,8 @@ export class Card {
   }
 
   private setEventListeners() {
-    const likeButton = this.element.querySelector(
-      ".card__like-button",
-    ) as HTMLButtonElement;
-    const deleteButton = this.element.querySelector(
-      ".card__delete-button",
-    ) as HTMLButtonElement;
-    const cardImage = this.element.querySelector(
-      ".card__image",
-    ) as HTMLImageElement;
-
-    likeButton.addEventListener("click", () => this.handleLike());
-    deleteButton.addEventListener("click", () => this.handleDelete());
-    cardImage.addEventListener("click", () => this.handleImageClick());
+    this.likeButton.addEventListener("click", () => this.handleLike());
+    this.deleteButton.addEventListener("click", () => this.handleDelete());
+    this.image.addEventListener("click", () => this.handleImageClick());
   }
 }

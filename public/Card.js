@@ -5,6 +5,10 @@ export class Card {
         this.templateSelector = templateSelector;
         this.handleCardClick = handleCardClick;
         this.element = this.getTemplate();
+        this.title = this.element.querySelector(".card__title");
+        this.image = this.element.querySelector(".card__image");
+        this.likeButton = this.element.querySelector(".card__like-button");
+        this.deleteButton = this.element.querySelector(".card__delete-button");
     }
     getTemplate() {
         const cardTemplate = document.querySelector(this.templateSelector);
@@ -14,17 +18,14 @@ export class Card {
         return cardElement;
     }
     generateCard() {
-        const cardTitle = this.element.querySelector(".card__title");
-        cardTitle.textContent = this.name;
-        const cardImage = this.element.querySelector(".card__image");
-        cardImage.src = this.link;
-        cardImage.alt = this.name;
+        this.title.textContent = this.name;
+        this.image.src = this.link;
+        this.image.alt = this.name;
         this.setEventListeners();
         return this.element;
     }
     handleLike() {
-        const likeButton = this.element.querySelector(".card__like-button");
-        likeButton.classList.toggle("card__like-button_is-active");
+        this.likeButton.classList.toggle("card__like-button_is-active");
     }
     handleDelete() {
         this.element.remove();
@@ -33,11 +34,8 @@ export class Card {
         this.handleCardClick(this.name, this.link);
     }
     setEventListeners() {
-        const likeButton = this.element.querySelector(".card__like-button");
-        const deleteButton = this.element.querySelector(".card__delete-button");
-        const cardImage = this.element.querySelector(".card__image");
-        likeButton.addEventListener("click", () => this.handleLike());
-        deleteButton.addEventListener("click", () => this.handleDelete());
-        cardImage.addEventListener("click", () => this.handleImageClick());
+        this.likeButton.addEventListener("click", () => this.handleLike());
+        this.deleteButton.addEventListener("click", () => this.handleDelete());
+        this.image.addEventListener("click", () => this.handleImageClick());
     }
 }

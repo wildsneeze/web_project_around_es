@@ -9,13 +9,13 @@ export interface FormConfig {
 export class FormValidator {
   private config: FormConfig;
   private formElement: HTMLFormElement;
-  private inputList: HTMLInputElement[];
+  private inputs: HTMLInputElement[];
   private buttonElement: HTMLButtonElement;
 
   constructor(config: FormConfig, formElement: HTMLFormElement) {
     this.config = config;
     this.formElement = formElement;
-    this.inputList = Array.from(
+    this.inputs = Array.from(
       this.formElement.querySelectorAll(this.config.inputSelector),
     );
     this.buttonElement = this.formElement.querySelector(
@@ -50,7 +50,7 @@ export class FormValidator {
   }
 
   private hasInvalidInput() {
-    return this.inputList.some((inputElement) => {
+    return this.inputs.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
@@ -67,7 +67,7 @@ export class FormValidator {
 
   private setEventListeners() {
     this.toggleButtonState();
-    this.inputList.forEach((inputElement) => {
+    this.inputs.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this.checkInputValidity(inputElement);
         this.toggleButtonState();
@@ -80,7 +80,7 @@ export class FormValidator {
   }
 
   public resetValidation() {
-    this.inputList.forEach((inputElement) => {
+    this.inputs.forEach((inputElement) => {
       this.hideInputError(inputElement);
     });
     this.toggleButtonState();

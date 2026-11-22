@@ -38,12 +38,52 @@ Cada ventana emergente se puede cerrar de tres formas:
 
 ---
 
+## Arquitectura (POO)
+
+El código está organizado en clases. Cada una tiene una sola responsabilidad y vive en su propio archivo dentro de `src/`. Ninguna clase crea instancias de otras: se comunican mediante callbacks que `index.ts` les pasa al crearlas.
+
+| Clase            | Responsabilidad                                                                  |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `FormValidator`  | Valida los campos de un formulario y activa o desactiva su botón de envío.       |
+| `Card`           | Crea el elemento de una tarjeta a partir de un `<template>` y gestiona sus botones. |
+| `Section`        | Renderiza una lista de elementos en un contenedor de la página.                  |
+| `Popup`          | Abre y cierra una ventana emergente (botón ✕, superposición y tecla `Esc`).      |
+| `PopupWithImage` | Hereda de `Popup` y muestra la imagen ampliada con su título.                    |
+| `PopupWithForm`  | Hereda de `Popup`, recoge los valores del formulario y los envía a un callback.  |
+| `UserInfo`       | Lee y actualiza el nombre y la descripción del perfil en la página.              |
+
+`index.ts` solo crea las instancias y conecta los eventos. La configuración de validación y las tarjetas iniciales están en `src/utils/constants.ts`.
+
+## Estructura
+
+```
+public/        Archivos que se publican: HTML, CSS, imágenes y el JS compilado
+src/           Código fuente en TypeScript
+  utils/       Constantes compartidas
+tsconfig.json  Configuración del compilador (src → public)
+```
+
+## Cómo ejecutarlo
+
+1. Compilar el código TypeScript:
+   ```
+   tsc
+   ```
+   Durante el desarrollo, `tsc --watch` recompila automáticamente al guardar.
+2. Abrir `public/index.html` con un servidor local (por ejemplo, la extensión Live Server de VS Code).
+
+---
+
 ## Tecnologías usadas
 
-- **HTML**: validación nativa con los atributos `required`, `minlength`, `maxlength` y `type="url"`.
+- **HTML**: elementos `<template>` y validación nativa con los atributos `required`, `minlength`, `maxlength` y `type="url"`.
 - **CSS**: Flexbox, Grid, media queries y metodología **BEM**.
-- **JavaScript**:
-  - Manipulación del DOM y elementos `<template>`.
+- **TypeScript**:
+  - Programación orientada a objetos: clases, `private` / `protected` / `public`, herencia con `extends` y `super`.
+  - Interfaces, alias de tipo, genéricos (`Section<T>`) y tipado de eventos (`KeyboardEvent`, `MouseEvent`, `SubmitEvent`).
+  - Bajo acoplamiento mediante callbacks.
   - Módulos ES (`import` / `export`).
+- **JavaScript (DOM)**:
   - API de validación de restricciones (`ValidityState`, `validationMessage`).
-  - Gestión de eventos (`input`, `submit`, `mousedown`, `keydown`).
+  - Gestión de eventos (`input`, `submit`, `click`, `mousedown`, `keydown`).
+- **GitHub Actions**: despliegue automático de la carpeta `public/` en GitHub Pages.
